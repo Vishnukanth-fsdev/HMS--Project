@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.authservice.services.CustomerUserDetailsService;
 
@@ -21,6 +22,9 @@ public class AppSecurityConfig {
 	
 	@Autowired
 	private CustomerUserDetailsService customerUserDetailsService;
+	
+	@Autowired
+	private JwtFilter filter;
 	
 	String[] publicEndpoints= {
 			"/api/v1/auth/register",
@@ -52,15 +56,14 @@ public class AppSecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityConfig(HttpSecurity http) throws Exception {
-	    http
-	        .csrf(csrf -> csrf.disable())
-	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers(publicEndpoints).permitAll()
-	            .requestMatchers("/api/v1/admin/welcome").hasRole("ADMIN")
-	            .anyRequest().authenticated()
-	        );
-	    http.httpBasic();
-	    return http.build();
+		
+		http.authorizeHttpRequests(req ->{
+			req.requestMatchers(publicEndpoints).permitAll()
+			.requestMatchers("/api/v1/admin/welcome").hasRole("ADMIN")
+			.anyRequest().authenticated();
+		}).authenticationProvider(authProvider())
+		.addFilterBefore(filter,UsernamePasswordAuthenticationFilter.class);
+		return http.csrf().disable().build();
 	}
 
 }
