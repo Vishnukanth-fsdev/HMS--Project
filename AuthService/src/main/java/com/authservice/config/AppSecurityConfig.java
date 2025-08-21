@@ -51,13 +51,16 @@ public class AppSecurityConfig {
 	}
 	
 	@Bean
-	public SecurityFilterChain securityConfig(HttpSecurity http) throws Exception{
-		http
-		.csrf(csrf->csrf.disable())
-		.authorizeHttpRequests(auth -> 
-		auth.requestMatchers(publicEndpoints).permitAll()
-		.anyRequest().authenticated()
-		);
-		return http.build();
+	public SecurityFilterChain securityConfig(HttpSecurity http) throws Exception {
+	    http
+	        .csrf(csrf -> csrf.disable())
+	        .authorizeHttpRequests(auth -> auth
+	            .requestMatchers(publicEndpoints).permitAll()
+	            .requestMatchers("/api/v1/admin/welcome").hasRole("ADMIN")
+	            .anyRequest().authenticated()
+	        );
+	    http.httpBasic();
+	    return http.build();
 	}
+
 }
