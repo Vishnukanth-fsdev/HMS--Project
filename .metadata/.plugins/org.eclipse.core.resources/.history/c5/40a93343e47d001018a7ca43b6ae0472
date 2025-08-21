@@ -1,0 +1,12 @@
+package com.authservice.services;
+
+import org.springframework.stereotype.Service;
+
+import com.authservice.repository.UserRepository;
+
+@Service
+public class AuthService {
+	
+	
+
+}
