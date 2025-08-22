@@ -1,6 +1,5 @@
 package com.authservice.controller;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.authservice.dto.APIResponse;
 import com.authservice.dto.LoginDto;
-import com.authservice.dto.RefreshToken;
 import com.authservice.dto.UserDto;
 import com.authservice.services.AuthService;
 import com.authservice.services.JwtService;
@@ -64,24 +62,6 @@ public class UserController {
 		
 	}
 	
-	/*
-	 * @PostMapping("/refresh") public ResponseEntity<APIResponse<String>>
-	 * refreshToken(@RequestBody RefreshToken request){ String
-	 * refreshToken=request.getRefreshToken(); System.out.println(refreshToken);
-	 * if(jwtService.validateTokenAndRetrieveSubject(refreshToken) != null) { String
-	 * username=jwtService.getUsernameFromToken(refreshToken); String
-	 * newToken=jwtService.generateToken(username,
-	 * jwtService.getUsernameFromTokenRole(refreshToken)); APIResponse<String>
-	 * response=new APIResponse<>(); response.setMessage("New Token Generated");
-	 * response.setStatus(200); response.setData(newToken); return new
-	 * ResponseEntity<>(response,HttpStatusCode.valueOf(response.getStatus()));
-	 * 
-	 * } APIResponse<String> response=new APIResponse<>();
-	 * response.setMessage("New Token Not Generated"); response.setStatus(200);
-	 * response.setData("Something wrong"); return new
-	 * ResponseEntity<>(response,HttpStatusCode.valueOf(response.getStatus()));
-	 * 
-	 * }
-	 */
+	 
 
 }

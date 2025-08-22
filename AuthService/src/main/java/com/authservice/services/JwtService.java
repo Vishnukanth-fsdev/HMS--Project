@@ -13,7 +13,7 @@ public class JwtService {
 	
 	private static final String SECRET_KEY="my-super-secret-key";
 	private static final long EXPIRATION_TIME=86400000;
-	private static final long REFRESH_TIME= 86400000*7;
+	//private static final long REFRESH_TIME= 86400000*7;
 	
 	
 	public String generateToken(String username, String role) {
@@ -32,18 +32,7 @@ public class JwtService {
 				.getSubject();
 	}
 	
-	/*
-	 * public String refreshToken(String username,String role) { return JWT.create()
-	 * .withSubject(username) .withClaim("role",role) .withIssuedAt(new Date())
-	 * .withExpiresAt(new Date(System.currentTimeMillis()+REFRESH_TIME))
-	 * .sign(Algorithm.HMAC256(SECRET_KEY)); }
-	 * 
-	 * public String getUsernameFromToken(String token) { DecodedJWT decodedJWT =
-	 * JWT.require(Algorithm.HMAC256(SECRET_KEY)) .build() .verify(token); return
-	 * decodedJWT.getSubject(); }
-	 * 
-	 * public String getUsernameFromTokenRole(String token) { DecodedJWT decodedJWT
-	 * = JWT.require(Algorithm.HMAC256(SECRET_KEY)) .build() .verify(token); return
-	 * decodedJWT.getClaim("role").asString(); }
-	 */
+	
+	  
+	
 }
