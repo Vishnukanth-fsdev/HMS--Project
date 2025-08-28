@@ -1,5 +1,0 @@
-package com.authservice.services;
-
-public class CustomerUserDetailsService {
-
-}
